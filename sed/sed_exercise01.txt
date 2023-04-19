@@ -20,38 +20,51 @@
 
       5. Print all lines where the birthdays are in November or December.
       5. 打印生日在11月或12月的所有行。
+      cat sed01.txt | sed -n '/\(^.*:11\)\|\(^.*:12\)/p'
+
 
       6. Append three asterisks(3个星号) to the end of lines starting with Fred.
       6. 在以Fred开头的行末尾追加三个星号(3个星号)。
+      cat sed01.txt | sed  '/^Fred/s/$/\*\*\*/'
 
        7. Replace the line containing Jose with JOSE HAS RETIRED.
-      7. 取代何塞的是何塞已经退役。
+      7.用“JOSE HAS RETIRED”代替包含Jose的那行。
+      cat sed01.txt | sed   '/Jose/c\JOSE HAS RETIRED'
+
 
        8. Change Popeye's birthday to 11/14/46. Assume you don't know
        Popeye's original birthday. Use a regular expression to search for
        it.
-      8. 把大力水手的生日改成11/14/46。假设你不知道
-      大力水手最初的生日。使用正则表达式进行搜索
-      它。
+      8. 更改Popeye's的生日为11/14/46。假设您不知道Popeye's的原始生日。使用正则表达式搜索它
+      cat sed01.txt | sed  's/\(Popeye Sailor:[^:]*:[^:]*\):[0-9]*\/[0-9]*\/[0-9]*/\1:11\/14\/46/g'
 
 
 
        9. Delete all blank lines.
       9. 删除所有空白行。
+      cat sed01.txt | sed  '/^\s*$/d'
 
        10. 
        a. Insert above the first line the title PERSONNEL FILE.
+      在第一行上方插入标题“PERSONNEL FILE”
+      cat sed01.txt | sed  '1iPERSONNEL FILE'
 
 
        b. Remove the salaries ending in 500.
+      b.去掉以500结尾的工资。
+      cat sed01.txt | sed  '/:.*500$/d'
 
 
        c. Print the contents of the file with the last names and first names
        reversed.
+      c.按照姓和名反转的顺序打印文件内容。
+      cat sed01.txt | sed 's/\([^[:space:]]\+\)[[:space:]]\+\([^[:space:]:]\+\)/\2 \1/'
 
 
 
        d. Append at the end of the file THE END.
+      d.在文件末尾追加“END”。
+      cat sed01.txt | sed  '$a\END'
 
 
 
